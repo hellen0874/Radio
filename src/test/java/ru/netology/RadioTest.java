@@ -133,6 +133,23 @@ public class RadioTest {
 
     // проверка изменения громкости звука
     @Test
+    public void ShouldNotSetVolumeUnder0() {            // не дает установить громкость меньше 0
+        Radio radio = new Radio();
+        radio.setCurrentVolume(-1);
+        int actual = radio.getCurrentVolume();
+        int expected = 0;
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void ShouldNotSetVolumeUpper100() {            // не дает установить громкость выше 100
+        Radio radio = new Radio();
+        radio.setCurrentVolume(101);
+        int actual = radio.getCurrentVolume();
+        int expected = 0;
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
     public void ShouldAddOneToVolume() {            // переключение на +1 с середины диапазона
         Radio radio = new Radio();
         radio.setCurrentVolume(5);
@@ -141,6 +158,7 @@ public class RadioTest {
         int expected = 6;
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
     public void ShouldNotAddOneToVolumeFrom100() {            // переключение на +1 с конца диапазона (граничные значения)
         Radio radio = new Radio();
