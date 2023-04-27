@@ -16,7 +16,7 @@ public class Radio {
     }
 
     public int getCurrentStationNumber() {
-          return currentStationNumber;
+        return currentStationNumber;
     }
 
     public void nextStationNumber() {
@@ -37,21 +37,33 @@ public class Radio {
 
     // звук
 
+
+    public void setCurrentVolume(int currentVolume) {
+        if (currentVolume < 0) {
+            return;
+        }
+        if (currentVolume > 100) {              // номер станции от 0 до 9
+            return;
+        }
+        this.currentVolume = currentVolume;
+    }
+
     public int getCurrentVolume() {
         return currentVolume;
     }
-
 
     public void increaseVolume() {
         if (currentVolume < 100) {
             currentVolume = currentVolume + 1;  // увеличение уровня громкости на +1, после 100 ничего не делать
         }
+        currentVolume = 100;
     }
 
     public void decreaseVolume() {
         if (currentVolume < 100) {
-            currentVolume = currentVolume + 1;  // уменьшение уровня громкости на -1, после 0 ничего не делать
+            currentVolume = currentVolume - 1;  // уменьшение уровня громкости на -1, после 0 ничего не делать
         }
+        currentVolume = 0;
     }
 
 }
