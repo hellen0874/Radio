@@ -42,7 +42,7 @@ public class Radio {
         if (currentVolume < 0) {
             return;
         }
-        if (currentVolume > 100) {              // номер станции от 0 до 9
+        if (currentVolume > 100) {              // уровень грромкости от 0 до 100
             return;
         }
         this.currentVolume = currentVolume;
@@ -52,18 +52,27 @@ public class Radio {
         return currentVolume;
     }
 
+    // Для увеличения и уменьшения громкости взяла образец из разборного вебинара, по образцу из ДЗ тесты падали
+    // public void increaseVolume() {
+    //     if (currentVolume < 100) {
+    //          currentVolume = currentVolume + 1;
+    //  }
+
     public void increaseVolume() {
-        if (currentVolume < 100) {
+        if (currentVolume != 100) {
             currentVolume = currentVolume + 1;  // увеличение уровня громкости на +1, после 100 ничего не делать
+        } else {
+            currentVolume = 100;
         }
-        currentVolume = 100;
     }
 
     public void decreaseVolume() {
-        if (currentVolume < 100) {
+        if (currentVolume != 0) {
             currentVolume = currentVolume - 1;  // уменьшение уровня громкости на -1, после 0 ничего не делать
+        } else {
+            currentVolume = 0;
         }
-        currentVolume = 0;
     }
+
 
 }
