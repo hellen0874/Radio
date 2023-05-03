@@ -1,15 +1,24 @@
 package ru.netology;
 
 public class Radio {
-    private int currentStationNumber;
     private int currentVolume;
+    private int currentStationNumber;
+    private int maxStationNumber;
+
+    public Radio() {
+        this.maxStationNumber = 9;
+    }
+
+    public Radio(int amountOfStations) {
+        this.maxStationNumber = amountOfStations - 1;
+    }
 
     // выбор номера станции
     public void setCurrentStationNumber(int newCurrentStationNumber) {   // Установка номера через прямое указание
         if (newCurrentStationNumber < 0) {
             return;
         }
-        if (newCurrentStationNumber > 9) {              // номер станции от 0 до 9
+        if (newCurrentStationNumber > maxStationNumber) {              // номер станции от 0 до (max-1)
             return;
         }
         this.currentStationNumber = newCurrentStationNumber;
@@ -19,18 +28,18 @@ public class Radio {
         return currentStationNumber;
     }
 
-    public void nextStationNumber() {
-        int target = currentStationNumber + 1;    // установка следующего номера станции с условием 9->0
-        if (currentStationNumber == 9) {
+    public void next() {
+        int target = currentStationNumber + 1;    // установка следующего номера станции с условием max->0
+        if (currentStationNumber == maxStationNumber) {
             setCurrentStationNumber(0);
         }
         setCurrentStationNumber(target);
     }
 
-    public void prevStationNumber() {
-        int target = currentStationNumber - 1;    // установка предыдущего номера станции c условием 0-> 9
+    public void prev() {
+        int target = currentStationNumber - 1;    // установка предыдущего номера станции c условием 0-> max
         if (currentStationNumber == 0) {
-            setCurrentStationNumber(9);
+            setCurrentStationNumber(maxStationNumber);
         }
         setCurrentStationNumber(target);
     }
@@ -42,7 +51,7 @@ public class Radio {
         if (currentVolume < 0) {
             return;
         }
-        if (currentVolume > 100) {              // уровень грромкости от 0 до 100
+        if (currentVolume > 100) {              // уровень громкости от 0 до 100
             return;
         }
         this.currentVolume = currentVolume;
@@ -51,12 +60,6 @@ public class Radio {
     public int getCurrentVolume() {
         return currentVolume;
     }
-
-    // Для увеличения и уменьшения громкости взяла образец из разборного вебинара, по образцу из ДЗ тесты падали
-    // public void increaseVolume() {
-    //     if (currentVolume < 100) {
-    //          currentVolume = currentVolume + 1;
-    //  }
 
     public void increaseVolume() {
         if (currentVolume != 100) {
@@ -73,6 +76,5 @@ public class Radio {
             currentVolume = 0;
         }
     }
-
 
 }
